@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/BliTz037/GameServerTracker-LametricApp#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "fivem": "^2.1.7",
+    "minecraft-server-ping": "^0.0.4",
+    "ssq": "github:gpittarelli/node-ssq"
   }
 }
