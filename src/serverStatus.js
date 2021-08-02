@@ -3,7 +3,6 @@ const ssq = require('ssq');
 const fiveM = require('fivem');
 
 exports.minecraft = (address) => {
-    console.log("Ceci est un serveur Minecraft !!!");
     const ipTab = address.split(':');
     let port = 25565;
 
@@ -12,7 +11,6 @@ exports.minecraft = (address) => {
             port = ipTab[1];
         if (port < 0 || port > 65536)
             reject("Bad port : port should be > 0 and < 65536.");
-        console.log(`CHECK IP: ${ipTab[0]}:${port}`);
         mc.ping(ipTab[0], port)
             .then(data => {
                 console.log("GO");

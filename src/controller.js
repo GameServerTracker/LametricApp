@@ -28,14 +28,11 @@ exports.checkServer = (req, res) => {
         return res.status(200).json(data);
     if (req.query["address"] == '')
         return res.status(200).json(data);
-    console.log(req.query);
 
     if (req.query["type"] === "Minecraft") {
         server.minecraft(req.query["address"])
             .then(result => {
-                console.log(result);
                 data.frames[1].text = result;
-                console.log("Hummmm ok")
                 return res.status(200).json(data);
             })
             .catch(err => {
