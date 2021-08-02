@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "2b350697-9477-471f-935d-11898a6bba8e",
+		"name": "Lametric",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/server MC",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3042/server?name=Hypixel&type=Minecraft&address=mc.hypixel.net",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3042",
+					"path": [
+						"server"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Hypixel"
+						},
+						{
+							"key": "type",
+							"value": "Minecraft"
+						},
+						{
+							"key": "address",
+							"value": "mc.hypixel.net"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/server Source",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3042/server?name=DarkRP&type=Source&address=208.103.169.33:27015",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3042",
+					"path": [
+						"server"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "DarkRP"
+						},
+						{
+							"key": "type",
+							"value": "Source"
+						},
+						{
+							"key": "address",
+							"value": "208.103.169.33:27015"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/server FIVEM",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3042/server?name=Flash&type=FiveM&address=185.157.247.67:30120",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3042",
+					"path": [
+						"server"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Flash"
+						},
+						{
+							"key": "type",
+							"value": "FiveM"
+						},
+						{
+							"key": "address",
+							"value": "185.157.247.67:30120"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
