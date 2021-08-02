@@ -2,35 +2,36 @@ const config = require('../config.json');
 const server = require('./serverStatus');
 
 const typeTab = ["Minecraft", "Source", "FiveM"];
+const dataFormat = {
+    "frames": [
+        {
+            "text": "Server",
+            "icon": config.icon.unknown
+        },
+        {
+            "text": "OFFLINE",
+            "icon": config.icon.unknown
+        }
+    ]
+};
 
 exports.checkServer = (req, res) => {
-    let data = {
-        "frames": [
-            {
-                "text": "Server",
-                "icon": config.icon.unknown
-            },
-            {
-                "text": "OFFLINE",
-                "icon": config.icon.unknown
-            }
-        ]
-    }
+    let data = dataFormat;
+    let params = req.query;
 
-    if (!req.query.hasOwnProperty("name") ||
-        !req.query.hasOwnProperty("type") ||
-        !req.query.hasOwnProperty("address"))
+    if (!params.hasOwnProperty("name") || !params.hasOwnProperty("type") || !params.hasOwnProperty("address"))
         return res.status(400).json({ msg: "Missing parameters" });
-    if (req.query["name"] !== '')
-        data.frames[0].text = req.query["name"];
-    if (req.query["type"] == '' ||
-        !typeTab.includes(req.query["type"]))
+    if (params.name !== '')
+        data.frames[0].text = params.name;
+    if (params.type == '' || !typeTab.includes(params.type))
         return res.status(200).json(data);
-    if (req.query["address"] == '')
+    if (params.address == '')
         return res.status(200).json(data);
 
-    if (req.query["type"] === "Minecraft") {
-        server.minecraft(req.query["address"])
+    if (params.type === "Minecraft") {
+        data.frames[0].icon = config.icon.minecraft;
+        data.frames[1].icon = config.icon.minecraft;
+        server.minecraft(params.address)
             .then(result => {
                 data.frames[1].text = result;
                 return res.status(200).json(data);
@@ -39,5 +40,30 @@ exports.checkServer = (req, res) => {
                 console.error(err);
                 return res.status(200).json(data);
             });
-    }
+    } else if (params.type === "Source") {
+        data.frames[0].icon = config.icon.source;
+        data.frames[1].icon = config.icon.source;
+        server.source(params.address)
+            .then(result => {
+                data.frames[1].text = result;
+                return res.status(200).json(data);
+            })
+            .catch(err => {
+                console.error(err);
+                return res.status(200).json(data);
+            });
+    } else if (params.type === "FiveM") {
+        data.frames[0].icon = config.icon.fivem;
+        data.frames[1].icon = config.icon.fivem;
+        server.five(params.address)
+            .then(result => {
+                data.frames[1].text = result;
+                return res.status(200).json(data);
+            })
+            .catch(err => {
+                console.error(err);
+                return res.status(200).json(data);
+            });
+    } else
+        return res.status(200).json(data);
 }
