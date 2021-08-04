@@ -34,11 +34,11 @@ exports.checkServer = (req, res) => {
         server.minecraft(params.address)
             .then(result => {
                 data.frames[1].text = result;
-                return res.status(200).json(data);
+                res.status(200).json(data);
             })
             .catch(err => {
                 console.error(err);
-                return res.status(200).json(data);
+                res.status(200).json(data);
             });
     } else if (params.type === "Source") {
         data.frames[0].icon = config.icon.source;
@@ -46,11 +46,11 @@ exports.checkServer = (req, res) => {
         server.source(params.address)
             .then(result => {
                 data.frames[1].text = result;
-                return res.status(200).json(data);
+                res.status(200).json(data);
             })
             .catch(err => {
                 console.error(err);
-                return res.status(200).json(data);
+                res.status(200).json(data);
             });
     } else if (params.type === "FiveM") {
         data.frames[0].icon = config.icon.fivem;
@@ -58,12 +58,13 @@ exports.checkServer = (req, res) => {
         server.five(params.address)
             .then(result => {
                 data.frames[1].text = result;
-                return res.status(200).json(data);
+                res.status(200).json(data);
             })
             .catch(err => {
                 console.error(err);
-                return res.status(200).json(data);
+                res.status(200).json(data);
             });
     } else
-        return res.status(200).json(data);
+        res.status(200).json(data);
+    console.log(data);
 }
