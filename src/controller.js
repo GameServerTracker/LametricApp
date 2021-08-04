@@ -38,6 +38,7 @@ exports.checkServer = (req, res) => {
             })
             .catch(err => {
                 console.error(err);
+                data.frames[1].text = "OFFLINE";
                 res.status(200).json(data);
             });
     } else if (params.type === "Source") {
@@ -50,6 +51,7 @@ exports.checkServer = (req, res) => {
             })
             .catch(err => {
                 console.error(err);
+                data.frames[1].text = "OFFLINE";
                 res.status(200).json(data);
             });
     } else if (params.type === "FiveM") {
@@ -62,9 +64,12 @@ exports.checkServer = (req, res) => {
             })
             .catch(err => {
                 console.error(err);
+                data.frames[1].text = "OFFLINE";
                 res.status(200).json(data);
             });
-    } else
+    } else {
+        data.frames[1].text = "OFFLINE";
         res.status(200).json(data);
+    }
     console.log(data);
 }
