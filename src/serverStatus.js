@@ -32,7 +32,7 @@ exports.source = (address) => {
             if (data)
                 resolve(`${data.numplayers} / ${data.maxplayers}`);
             else
-                return console.log(`OFFLINE`);
+                return resolve("OFFLINE");
         });
     })
 }
