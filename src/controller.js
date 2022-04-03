@@ -37,7 +37,7 @@ exports.checkServer = (req, res) => {
                 res.status(200).json(data);
             })
             .catch(err => {
-                console.error(err);
+                console.error(`Error Minecraft: ${err}`);
                 data.frames[1].text = "OFFLINE";
                 res.status(200).json(data);
             });
@@ -50,7 +50,7 @@ exports.checkServer = (req, res) => {
                 res.status(200).json(data);
             })
             .catch(err => {
-                console.error(err);
+                console.error(`Error Source: ${err}`);
                 data.frames[1].text = "OFFLINE";
                 res.status(200).json(data);
             });
@@ -63,7 +63,7 @@ exports.checkServer = (req, res) => {
                 res.status(200).json(data);
             })
             .catch(err => {
-                console.error(err);
+                console.error(`Error FiveM: ${err}`);
                 data.frames[1].text = "OFFLINE";
                 res.status(200).json(data);
             });
@@ -71,5 +71,4 @@ exports.checkServer = (req, res) => {
         data.frames[1].text = "OFFLINE";
         res.status(200).json(data);
     }
-    console.log(data);
 }

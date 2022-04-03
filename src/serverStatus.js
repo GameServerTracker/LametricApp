@@ -10,7 +10,7 @@ exports.minecraft = (address) => {
         if (ipTab[1] != undefined)
             port = ipTab[1];
         if (port < 0 || port > 65536)
-            reject("Bad port : port should be > 0 and < 65536.");
+            reject("Bad port ! Port should be > 0 and < 65536.");
         mc.ping(ipTab[0], port)
             .then(data => { resolve(`${data.players.online} / ${data.players.max}`); })
             .catch(err => { reject(err); })
@@ -25,7 +25,7 @@ exports.source = (address) => {
         if (ipTab[1] != undefined)
             port = ipTab[1];
         if (port < 0 || port > 65536)
-            reject("Bad port : port should be > 0 and < 65536.");
+            reject("Bad port ! Port should be > 0 and < 65536.");
         ssq.info(ipTab[0], port, function (err, data) {
             if (err)
                 reject(err);
