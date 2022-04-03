@@ -71,4 +71,5 @@ exports.checkServer = (req, res) => {
         data.frames[1].text = "OFFLINE";
         res.status(200).json(data);
     }
+    console.log(data);
 }
