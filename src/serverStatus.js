@@ -40,13 +40,15 @@ exports.source = (address) => {
 exports.five = (address) => {
 
     const ipTab = address.split(':');
+    const defaultPort = 30120;
 
     return new Promise((resolve, reject) => {
-        if (ipTab[1] != undefined)
-            if (ipTab[1] < 0 || ipTab[1] > 65536)
-                reject("Bad port : port should be > 0 and < 65536.");
-
-        const srv = new fiveM.Server('185.157.247.67:30120');
+        if (ipTab[1] != undefined) {
+            if (isNaN(ipTab[1]) || ipTab[1] < 0 || ipTab[1] > 65536)
+                reject("Bad port ! Port should be > 0 and < 65536.");
+        } else
+            address += `:${defaultPort}`;
+        const srv = new fiveM.Server(address);
         srv.getPlayers()
             .then(data => {
                 const p = data;
