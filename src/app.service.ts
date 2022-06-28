@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): any {
-    return { message: 'Hello World!' };
+    return { message: 'GameServerTracker 3.0 is OK !' };
   }
 }

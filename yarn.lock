@@ -1395,6 +1395,13 @@ axios@0.27.2:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
 
+axios@^0.21.1:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+  dependencies:
+    follow-redirects "^1.14.0"
+
 babel-jest@^27.5.1:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.5.1.tgz#a1bf8d61928edfefd21da27eb86a695bfd691444"
@@ -1555,6 +1562,11 @@ buffer@^5.5.0:
     base64-js "^1.3.1"
     ieee754 "^1.1.13"
 
+bufferpack@~0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/bufferpack/-/bufferpack-0.0.6.tgz#fb3d8738a0e1e4e03bcff99f9a75f9ec18a9d73e"
+  integrity sha512-MTWvLHElqczrIVhge9qHtqgNigJFyh0+tCDId5yCbFAfuekHWIG+uAgvoHVflwrDPuY/e47JE1ki5qcM7w4uLg==
+
 busboy@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/busboy/-/busboy-1.6.0.tgz#966ea36a9502e43cdb9146962523b92f531f6893"
@@ -1659,6 +1671,19 @@ cjs-module-lexer@^1.0.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
+
+class-transformer@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.5.1.tgz#24147d5dffd2a6cea930a3250a677addf96ab336"
+  integrity sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==
+
+class-validator@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.13.2.tgz#64b031e9f3f81a1e1dcd04a5d604734608b24143"
+  integrity sha512-yBUcQy07FPlGzUjoLuUfIOXzgynnQPPruyK1Ge2B74k9ROwnle1E+NxLWnUv5OLU8hA/qL5leAE9XnXq3byaBw==
+  dependencies:
+    libphonenumber-js "^1.9.43"
+    validator "^13.7.0"
 
 cli-cursor@^3.1.0:
   version "3.1.0"
@@ -2385,6 +2410,13 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
+fivem@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/fivem/-/fivem-2.1.8.tgz#32d789c8c46c9e06bd3dde159f3f2e30ef3f1933"
+  integrity sha512-hgZO8VlSHPafwddm54c8rvBS/uTGCohZxIgj6PHTnXqZKGTCDaciiW3JjQTA/QefidA7JQ+sXXDIi/oTupmBVA==
+  dependencies:
+    axios "^0.21.1"
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
@@ -2398,7 +2430,7 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.6.tgz#022e9218c637f9f3fc9c35ab9c9193f05add60b2"
   integrity sha512-0sQoMh9s0BYsm+12Huy/rkKxVu4R1+r96YX5cG44rHV0pQ6iC3Q+mkoMFaGWObMFYQxCVT+ssG1ksneA2MI9KQ==
 
-follow-redirects@^1.14.9:
+follow-redirects@^1.14.0, follow-redirects@^1.14.9:
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
   integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
@@ -3428,6 +3460,11 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+libphonenumber-js@^1.9.43:
+  version "1.10.7"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.7.tgz#4c010b7b57e824c571ea4cdbf7aea6f3c408878c"
+  integrity sha512-jZXLCCWMe1b/HXkjiLeYt2JsytZMcqH26jLFIdzFDFF0xvSUWrYKyvPlyPG+XJzEyKUFbcZxLdWGMwQsWaHDxQ==
+
 lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
@@ -3572,6 +3609,13 @@ mimic-fn@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
+
+minecraft-server-ping@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/minecraft-server-ping/-/minecraft-server-ping-0.0.8.tgz#713a9af3b683f5b2825009344417a1ec0004798c"
+  integrity sha512-wbJTE/fefcPkwvND3JPhbfr2Y2/lJ6OKrbACwwPY1TX6flp8Y1USxzFseM6jwcI6wR3uuBtvCo6s6IdpmFnh9A==
+  dependencies:
+    varint "^6.0.0"
 
 minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
@@ -4293,6 +4337,13 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
+ssq@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ssq/-/ssq-0.0.1.tgz#409c8e2087f5ad00ba58e657b515d46aac0c14ce"
+  integrity sha512-4xb6i7LpsOnxbsooSg5EL+qBpqBGQGLBIIXczy7dz+MWhU1U0x7JkfoQXVib72gOYyNtROyTFJ2CPIrj3BDAnw==
+  dependencies:
+    bufferpack "~0.0.6"
+
 stack-utils@^2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-2.0.5.tgz#d25265fca995154659dbbfba3b49254778d2fdd5"
@@ -4746,6 +4797,16 @@ v8-to-istanbul@^8.1.0:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
+
+validator@^13.7.0:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
+
+varint@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/varint/-/varint-6.0.0.tgz#9881eb0ce8feaea6512439d19ddf84bf551661d0"
+  integrity sha512-cXEIW6cfr15lFv563k4GuVuW/fiwjknytD37jIOLSdSWuOI6WnO/oKwmP2FQTU2l01LP8/M5TSAJpzUaGe3uWg==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
