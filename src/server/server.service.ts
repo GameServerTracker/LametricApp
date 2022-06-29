@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { IconServer } from 'src/config/enum';
+import { serverIconDict, serverTypeDict } from 'src/config/dict';
+import { IconServer, ServerType } from 'src/config/enum';
 import { TrackService } from 'src/track/track.service';
 import ServerCheckedDto from './dto/serverCheckedDto';
 
@@ -7,17 +8,27 @@ import ServerCheckedDto from './dto/serverCheckedDto';
 export class ServerService {
     constructor(private readonly trackService: TrackService) { }
 
+    readonly actionDict: { [id in ServerType]: (address: string) => Promise<string> } =
+        {
+            Minecraft: this.trackService.trackMinecraftServer,
+            Source: this.trackService.trackSourceServer,
+            FiveM: this.trackService.trackFiveMServer
+        };
+
     async trackServer(serverChecked: ServerCheckedDto): Promise<any> {
-        console.log(serverChecked);
+        const type: ServerType = serverTypeDict[serverChecked.type];
+        const icon: IconServer = serverIconDict[type];
+        const result: string = await this.actionDict[type](serverChecked.address);
+
         return {
             "frames": [
                 {
-                    "text": "Server",
-                    "icon": IconServer.Unknown
+                    "text": serverChecked.name,
+                    "icon": icon
                 },
                 {
-                    "text": "OFFLINE",
-                    "icon": IconServer.Unknown
+                    "text": result,
+                    "icon": icon
                 }
             ]
         }
