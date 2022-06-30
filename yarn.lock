@@ -1562,11 +1562,6 @@ buffer@^5.5.0:
     base64-js "^1.3.1"
     ieee754 "^1.1.13"
 
-bufferpack@~0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/bufferpack/-/bufferpack-0.0.6.tgz#fb3d8738a0e1e4e03bcff99f9a75f9ec18a9d73e"
-  integrity sha512-MTWvLHElqczrIVhge9qHtqgNigJFyh0+tCDId5yCbFAfuekHWIG+uAgvoHVflwrDPuY/e47JE1ki5qcM7w4uLg==
-
 busboy@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/busboy/-/busboy-1.6.0.tgz#966ea36a9502e43cdb9146962523b92f531f6893"
@@ -4327,6 +4322,11 @@ source-map@^0.7.3:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
   integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
 
+source-server-query@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/source-server-query/-/source-server-query-3.0.2.tgz#0d05ca4a29f2cd2698d723ddf49486f2d402fa91"
+  integrity sha512-DzgwLTseDVeXhVa0gC/wTV2q6F5q+MqvQXoXwE8AzJ6YWj+IAERSbTc6rRvJwKWa7DW4teQF9MraIHxpyrXxcA==
+
 sourcemap-codec@^1.4.4:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz#ea804bd94857402e6992d05a38ef1ae35a9ab4c4"
@@ -4336,13 +4336,6 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
-
-ssq@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ssq/-/ssq-0.0.1.tgz#409c8e2087f5ad00ba58e657b515d46aac0c14ce"
-  integrity sha512-4xb6i7LpsOnxbsooSg5EL+qBpqBGQGLBIIXczy7dz+MWhU1U0x7JkfoQXVib72gOYyNtROyTFJ2CPIrj3BDAnw==
-  dependencies:
-    bufferpack "~0.0.6"
 
 stack-utils@^2.0.3:
   version "2.0.5"
