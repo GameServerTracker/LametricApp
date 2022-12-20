@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ping } from 'minecraft-server-ping';
 import { IMinecraftData } from 'minecraft-server-ping/dist/interfaces';
 import query from 'source-server-query';
+import axios, { AxiosResponse } from 'axios';
 
 @Injectable()
 export class TrackService {
@@ -39,6 +40,12 @@ export class TrackService {
     }
 
     async trackFiveMServer(address: string): Promise<string> {
-        return "0 / 0";
+        try {
+            const response: AxiosResponse = await axios.get(`http://${address}/dynamic.json`, { timeout: 2000 });
+            return `${response.data.clients} / ${response.data.sv_maxclients}`;
+        } catch (err: any) {
+            console.error(err);
+            return "OFFLINE";
+        }
     }
 }
