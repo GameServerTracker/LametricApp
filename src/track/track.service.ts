@@ -10,7 +10,7 @@ export class TrackService {
         const addressSplited: string[] = address.split(':');
         const hostname = addressSplited[0];
         const port: number = addressSplited[1] != undefined ? +addressSplited[1] : 25565;
-        const optionPing: any = { timeout: 1000 }
+        const optionPing: any = { timeout: 2000 }
 
         try {
             if (port < 0 || port > 65536 || isNaN(port))
@@ -31,7 +31,7 @@ export class TrackService {
         try {
             if (port < 0 || port > 65536 || isNaN(port))
                 throw (`Address ${address} has a bad port !`);
-            const data: any = await query.info(hostname, port, 1000);
+            const data: any = await query.info(hostname, port, 2000);
             return `${data.players || 0} / ${data.max_players || 0}`;
         } catch (err: any) {
             console.error(err);
