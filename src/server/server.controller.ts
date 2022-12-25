@@ -1,12 +1,14 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { CACHE_MANAGER, Controller, Get, Inject, Query } from '@nestjs/common';
 import ServerCheckedDto from './dto/serverCheckedDto';
 import { ServerService } from './server.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Cache } from 'cache-manager';
 
 @ApiTags('Server')
 @Controller('server')
 export class ServerController {
-    constructor(private readonly serverService: ServerService) { }
+    constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache,
+        private readonly serverService: ServerService) { }
 
     @Get()
     @ApiOperation({
@@ -32,6 +34,22 @@ export class ServerController {
     })
 
     async trackServer(@Query() serverChecked: ServerCheckedDto): Promise<any> {
+        const cache: any = await this.cacheManager.get(`${serverChecked.type}:${serverChecked.address}`);
+
+        if (cache != null) {
+            console.log("Data Cache !");
+            console.log(cache);
+            return {
+                "frames": [
+                    {
+                        "text": serverChecked.name,
+                    },
+                    {
+                        "text": cache,
+                    }
+                ]
+            }
+        }
         return await this.serverService.trackServer(serverChecked);
     }
 }
