@@ -26,7 +26,7 @@ export class ServerService {
             result = cache;
         } else {
             result = await this.actionDict[serverChecked.type](serverChecked.address);
-            this.cacheManager.set(`${serverChecked.type}:${serverChecked.address}`, result, 10 * 1000);
+            this.cacheManager.set(`${serverChecked.type}:${serverChecked.address}`, result, 5 * 60 * 1000);
         }
         return {
             "frames": [
