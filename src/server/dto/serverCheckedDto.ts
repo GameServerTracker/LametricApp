@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 import { ServerType } from "src/config/enum";
 
 export default class ServerCheckedDto {
@@ -15,7 +15,7 @@ export default class ServerCheckedDto {
         example: ServerType.Minecraft,
         enum: [ServerType.Minecraft, ServerType.Source, ServerType.FiveM],
     })
-    @IsNotEmpty() @IsString()
+    @IsNotEmpty() @IsString() @IsEnum(ServerType)
     type: string;
 
     @ApiProperty({
