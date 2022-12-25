@@ -16,7 +16,7 @@ export default class ServerCheckedDto {
         enum: [ServerType.Minecraft, ServerType.Source, ServerType.FiveM],
     })
     @IsNotEmpty() @IsString() @IsEnum(ServerType)
-    type: string;
+    type: ServerType;
 
     @ApiProperty({
         description: "Server's address",
