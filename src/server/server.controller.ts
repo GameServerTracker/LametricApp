@@ -30,7 +30,6 @@ export class ServerController {
             }
         }
     })
-
     async trackServer(@Query() serverChecked: ServerCheckedDto): Promise<any> {
         return await this.serverService.trackServer(serverChecked);
     }
