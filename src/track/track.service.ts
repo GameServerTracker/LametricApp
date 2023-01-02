@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ping } from 'minecraft-server-ping';
 import { IMinecraftData } from 'minecraft-server-ping/dist/interfaces';
-import query from 'source-server-query';
 import axios, { AxiosResponse } from 'axios';
+import { Server } from '@fabricio-191/valve-server-query';
 
 @Injectable()
 export class TrackService {
- 
+
     async trackMinecraftServer(address: string): Promise<string> {
         const addressSplited: string[] = address.split(':');
         const hostname = addressSplited[0];
@@ -32,8 +32,9 @@ export class TrackService {
         try {
             if (port < 0 || port > 65536 || isNaN(port))
                 throw (`Address ${address} has a bad port !`);
-            const data: any = await query.info(hostname, port, 2000);
-            return `${data.players || 0} / ${data.max_players || 0}`;
+            const server: Server = await Server({ ip: hostname, port, timeout: 3000 });
+            const data: any = await server.getInfo();
+            return `${data.players.online || 0} / ${data.players.max || 0}`;
         } catch (err: any) {
             Logger.warn(`[Source server | ${address}] ${err.name}: ${err.message}`);
             return "OFFLINE";
