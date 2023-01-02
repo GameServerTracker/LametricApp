@@ -512,6 +512,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fabricio-191/valve-server-query@^4.1.8":
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/@fabricio-191/valve-server-query/-/valve-server-query-4.1.8.tgz#30a17f61e6ce443aebc66d1c64225c2125913682"
+  integrity sha512-Su1gK6poRUEnfvTMbq1r6BOvRhjB/JbZwnXpdIEcrHHZoRM5dUjBUWYcErML3xOLG9mIvr8n5A6QKpeXbW2Zww==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"
@@ -4333,11 +4338,6 @@ source-map@^0.6.0, source-map@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-
-source-server-query@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/source-server-query/-/source-server-query-3.0.2.tgz#0d05ca4a29f2cd2698d723ddf49486f2d402fa91"
-  integrity sha512-DzgwLTseDVeXhVa0gC/wTV2q6F5q+MqvQXoXwE8AzJ6YWj+IAERSbTc6rRvJwKWa7DW4teQF9MraIHxpyrXxcA==
 
 sourcemap-codec@^1.4.8:
   version "1.4.8"

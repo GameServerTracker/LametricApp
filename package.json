@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@fabricio-191/valve-server-query": "^4.1.8",
     "@nestjs/common": "^9.2.1",
     "@nestjs/core": "^9.2.1",
     "@nestjs/platform-express": "^9.2.1",
@@ -32,8 +33,7 @@
     "minecraft-server-ping": "^0.0.8",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0",
-    "source-server-query": "^3.0.2"
+    "rxjs": "^7.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.1.5",
