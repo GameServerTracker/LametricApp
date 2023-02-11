@@ -7,6 +7,7 @@ enum IconServer {
 
 enum ServerType {
     FiveM = "FiveM",
+    FiveMByCfxCode = "FiveMCfxCode",
     Source = "Source",
     Minecraft = "Minecraft"
 };
