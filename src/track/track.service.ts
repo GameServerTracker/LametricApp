@@ -50,4 +50,14 @@ export class TrackService {
             return "OFFLINE";
         }
     }
+
+    async trackFiveMServerByCfx(code: string): Promise<any> {
+        try {
+            const response: AxiosResponse = await axios.get(`https://servers-frontend.fivem.net/api/servers/single/${code}`, { timeout: 2000, headers: { 'User-Agent': 'GST API' } });
+            return `${response.data.Data.clients} / ${response.data.Data.sv_maxclients}`;
+        } catch (err: any) {
+            Logger.warn(`[FiveM server | CFX ${code}] ${err.name}: ${err.message}`);
+            return "OFFLINE";
+        }
+    }
 }

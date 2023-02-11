@@ -13,7 +13,7 @@ export default class ServerCheckedDto {
     @ApiProperty({
         description: "Type of game server",
         example: ServerType.Minecraft,
-        enum: [ServerType.Minecraft, ServerType.Source, ServerType.FiveM],
+        enum: [ServerType.Minecraft, ServerType.Source, ServerType.FiveM, ServerType.FiveMByCfxCode],
     })
     @IsNotEmpty() @IsString() @IsEnum(ServerType)
     type: ServerType;

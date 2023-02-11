@@ -14,7 +14,8 @@ export class ServerService {
         {
             Minecraft: this.trackService.trackMinecraftServer,
             Source: this.trackService.trackSourceServer,
-            FiveM: this.trackService.trackFiveMServer
+            FiveM: this.trackService.trackFiveMServer,
+            FiveMCfxCode: this.trackService.trackFiveMServerByCfx
         };
 
     async trackServer(serverChecked: ServerCheckedDto): Promise<any> {
