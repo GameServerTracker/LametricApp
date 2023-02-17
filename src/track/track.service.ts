@@ -1,8 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ping } from 'minecraft-server-ping';
-import { IMinecraftData } from 'minecraft-server-ping/dist/interfaces';
 import axios, { AxiosResponse } from 'axios';
 import { Server } from '@fabricio-191/valve-server-query';
+import * as minecraftServer from 'minecraft-server-util';
 
 @Injectable()
 export class TrackService {
@@ -11,15 +10,32 @@ export class TrackService {
         const addressSplited: string[] = address.split(':');
         const hostname = addressSplited[0];
         const port: number = addressSplited[1] != undefined ? +addressSplited[1] : 25565;
-        const optionPing: any = { timeout: 2000 }
+        const options: minecraftServer.JavaStatusOptions = { timeout: 2000, enableSRV: true };
 
         try {
             if (port < 0 || port > 65536 || isNaN(port))
                 throw (`Address ${address} has a bad port !`);
-            const data: IMinecraftData = await ping(hostname, port, optionPing);
+            const data: minecraftServer.JavaStatusResponse = await minecraftServer.status(hostname, port, options);
             return `${data.players.online || 0} / ${data.players.max || 0}`;
         } catch (err: any) {
             Logger.warn(`[MC server | ${address}] ${err.name}: ${err.message}`);
+            return "OFFLINE";
+        }
+    }
+
+    async trackMinecraftBedrockServer(address: string): Promise<string> {
+        const addressSplited: string[] = address.split(':');
+        const hostname = addressSplited[0];
+        const port: number = addressSplited[1] != undefined ? +addressSplited[1] : 25565;
+        const options: minecraftServer.BedrockStatusOptions = { timeout: 2000, enableSRV: true };
+
+        try {
+            if (port < 0 || port > 65536 || isNaN(port))
+                throw (`Address ${address} has a bad port !`);
+            const data: minecraftServer.BedrockStatusResponse = await minecraftServer.statusBedrock(hostname, port, options);
+            return `${data.players.online || 0} / ${data.players.max || 0}`;
+        } catch (err: any) {
+            Logger.warn(`[MC Bedrock server | ${address}] ${err.name}: ${err.message}`);
             return "OFFLINE";
         }
     }

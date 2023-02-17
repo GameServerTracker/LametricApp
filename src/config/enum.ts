@@ -9,7 +9,8 @@ enum ServerType {
     FiveM = "FiveM",
     FiveMByCfxCode = "FiveMCfxCode",
     Source = "Source",
-    Minecraft = "Minecraft"
+    Minecraft = "Minecraft",
+    MinecraftBedrock = "MinecraftBedrock"
 };
 
 export {

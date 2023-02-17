@@ -13,6 +13,7 @@ export class ServerService {
     readonly actionDict: { [id in ServerType]: (address: string) => Promise<string> } =
         {
             Minecraft: this.trackService.trackMinecraftServer,
+            MinecraftBedrock: this.trackService.trackMinecraftBedrockServer,
             Source: this.trackService.trackSourceServer,
             FiveM: this.trackService.trackFiveMServer,
             FiveMCfxCode: this.trackService.trackFiveMServerByCfx
