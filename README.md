@@ -1,10 +1,10 @@
 # Game Server Tracker - Lametric App
 
-![app_icon](https://github.com/GameServerTracker/LametricApp/images/gst_icon.png)
+![app_icon](https://github.com/GameServerTracker/LametricApp/main/images/gst_icon.png)
 
 ## Introduction
 
-![demo](https://github.com/GameServerTracker/LametricApp/images/app.gif)
+![demo](https://github.com/GameServerTracker/LametricApp/main/images/app.gif)
 
 G.S.T displays the number of players connected on various game servers:
 
