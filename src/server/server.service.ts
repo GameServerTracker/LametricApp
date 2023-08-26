@@ -10,14 +10,13 @@ export class ServerService {
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache,
         private readonly trackService: TrackService) { }
 
-    readonly actionDict: { [id in ServerType]: (address: string) => Promise<string> } =
-        {
-            Minecraft: this.trackService.trackMinecraftServer,
-            MinecraftBedrock: this.trackService.trackMinecraftBedrockServer,
-            Source: this.trackService.trackSourceServer,
-            FiveM: this.trackService.trackFiveMServer,
-            FiveMCfxCode: this.trackService.trackFiveMServerByCfx
-        };
+    readonly actionDict: { [id in ServerType]: (address: string) => Promise<string> } = {
+        Minecraft: (address: string) => this.trackService.trackMinecraftServer(address),
+        MinecraftBedrock: (address: string) => this.trackService.trackMinecraftBedrockServer(address),
+        Source: (address: string) => this.trackService.trackSourceServer(address),
+        FiveM: (address: string) => this.trackService.trackFiveMServer(address),
+        FiveMCfxCode: (code: string) => this.trackService.trackFiveMServerByCfx(code)
+    };
 
     async trackServer(serverChecked: ServerCheckedDto): Promise<any> {
         const icon: IconServer = serverIconDict[serverChecked.type];

@@ -6,6 +6,8 @@ import * as minecraftServer from 'minecraft-server-util';
 @Injectable()
 export class TrackService {
 
+    private readonly logger: Logger = new Logger(TrackService.name);
+
     async trackMinecraftServer(address: string): Promise<string> {
         const addressSplited: string[] = address.split(':');
         const hostname = addressSplited[0];
@@ -18,7 +20,7 @@ export class TrackService {
             const data: minecraftServer.JavaStatusResponse = await minecraftServer.status(hostname, port, options);
             return `${data.players.online || 0} / ${data.players.max || 0}`;
         } catch (err: any) {
-            Logger.warn(`[MC server | ${address}] ${err.name}: ${err.message}`);
+            this.logger.warn(`[MC, ${address}] ${err.name}: ${err.message}`);
             return "OFFLINE";
         }
     }
@@ -35,7 +37,7 @@ export class TrackService {
             const data: minecraftServer.BedrockStatusResponse = await minecraftServer.statusBedrock(hostname, port, options);
             return `${data.players.online || 0} / ${data.players.max || 0}`;
         } catch (err: any) {
-            Logger.warn(`[MC Bedrock server | ${address}] ${err.name}: ${err.message}`);
+            this.logger.warn(`[MC Bedrock, ${address}] ${err.name}: ${err.message}`);
             return "OFFLINE";
         }
     }
@@ -52,7 +54,7 @@ export class TrackService {
             const data: any = await server.getInfo();
             return `${data.players.online || 0} / ${data.players.max || 0}`;
         } catch (err: any) {
-            Logger.warn(`[Source server | ${address}] ${err.name}: ${err.message}`);
+            this.logger.warn(`[Source, ${address}] ${err.name}: ${err.message}`);
             return "OFFLINE";
         }
     }
@@ -62,7 +64,7 @@ export class TrackService {
             const response: AxiosResponse = await axios.get(`http://${address}/dynamic.json`, { timeout: 2000 });
             return `${response.data.clients} / ${response.data.sv_maxclients}`;
         } catch (err: any) {
-            Logger.warn(`[FiveM server | ${address}] ${err.name}: ${err.message}`);
+            this.logger.warn(`[FiveM, ${address}] ${err.name}: ${err.message}`);
             return "OFFLINE";
         }
     }
@@ -72,7 +74,7 @@ export class TrackService {
             const response: AxiosResponse = await axios.get(`https://servers-frontend.fivem.net/api/servers/single/${code}`, { timeout: 2000, headers: { 'User-Agent': 'GST API' } });
             return `${response.data.Data.clients} / ${response.data.Data.sv_maxclients}`;
         } catch (err: any) {
-            Logger.warn(`[FiveM server | CFX ${code}] ${err.name}: ${err.message}`);
+            this.logger.warn(`[FiveM CFX, ${code}] ${err.name}: ${err.message}`);
             return "OFFLINE";
         }
     }
