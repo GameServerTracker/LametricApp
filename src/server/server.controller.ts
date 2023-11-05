@@ -2,6 +2,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import ServerCheckedDto from './dto/serverCheckedDto';
 import { ServerService } from './server.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import FrameDto from 'src/lametric/frameDto';
 
 @ApiTags('Server')
 @Controller('server')
@@ -15,6 +16,7 @@ export class ServerController {
     })
     @ApiResponse({
         status: 200,
+        description: "Response if the server is found and online",
         schema: {
             example: {
                 "frames": [
@@ -23,14 +25,14 @@ export class ServerController {
                         "icon": "7285"
                     },
                     {
-                        "text": "33722 / 100000",
+                        "text": "47944 / 200000",
                         "icon": "7285"
                     }
                 ]
-            }
-        }
+            },
+        },
     })
-    async trackServer(@Query() serverChecked: ServerCheckedDto): Promise<any> {
+    async trackServer(@Query() serverChecked: ServerCheckedDto): Promise<FrameDto> {
         return await this.serverService.trackServer(serverChecked);
     }
 }
