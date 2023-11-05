@@ -4,6 +4,8 @@ import { IconServer, ServerType } from 'src/config/enum';
 import { TrackService } from 'src/track/track.service';
 import ServerCheckedDto from './dto/serverCheckedDto';
 import { Cache } from 'cache-manager';
+import FrameDto from 'src/lametric/frameDto';
+import FrameTextDto from 'src/lametric/frameTextDto';
 
 @Injectable()
 export class ServerService {
@@ -18,7 +20,7 @@ export class ServerService {
         FiveMCfxCode: (code: string) => this.trackService.trackFiveMServerByCfx(code)
     };
 
-    async trackServer(serverChecked: ServerCheckedDto): Promise<any> {
+    async trackServer(serverChecked: ServerCheckedDto): Promise<FrameDto> {
         const icon: IconServer = serverIconDict[serverChecked.type];
         const cache: any = await this.cacheManager.get(`${serverChecked.type}:${serverChecked.address}`);
         let result: string = null;
@@ -31,15 +33,9 @@ export class ServerService {
         }
         return {
             "frames": [
-                {
-                    "text": serverChecked.name,
-                    "icon": icon
-                },
-                {
-                    "text": result,
-                    "icon": icon
-                }
+                new FrameTextDto(serverChecked.name, icon),
+                new FrameTextDto(result, icon)
             ]
-        }
+        } as FrameDto;
     }
 }

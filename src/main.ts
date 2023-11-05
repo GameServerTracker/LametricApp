@@ -2,6 +2,10 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import GoalData from './lametric/GoalData';
+import FrameGoalDto from './lametric/frameGoalDto';
+import FrameTextDto from './lametric/frameTextDto';
+import FrameSparklineDto from './lametric/frameSparklineDto';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +16,9 @@ async function bootstrap() {
   .setVersion("1.0")
   .setContact("BliTz_37", "https://github.com/BliTz037", "blitz@blitzlab.ninja")
   .build();
-  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig, {
+    extraModels: [GoalData, FrameGoalDto, FrameTextDto, FrameSparklineDto]
+  });
 
   SwaggerModule.setup('api-docs', app, swaggerDocument);
   app.useGlobalPipes(new ValidationPipe({ disableErrorMessages: false, whitelist: true }))
