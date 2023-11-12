@@ -6,12 +6,14 @@ import ServerCheckedDto from './dto/serverCheckedDto';
 import { Cache } from 'cache-manager';
 import FrameDto from 'src/lametric/frameDto';
 import FrameTextDto from 'src/lametric/frameTextDto';
+import { ServerMetricsService } from './server-metrics/server-metrics.service';
 import { ServerTrackResultDto } from 'src/track/dto/serverTrackResultDto';
 
 @Injectable()
 export class ServerService {
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache,
         private readonly trackService: TrackService,
+        private readonly serverMetricsService: ServerMetricsService
     ) { }
 
     readonly actionDict: { [id in ServerType]: (address: string) => Promise<ServerTrackResultDto> } = {
@@ -32,6 +34,12 @@ export class ServerService {
         } else {
             result = await this.actionDict[serverChecked.type](serverChecked.address);
             this.cacheManager.set(`${serverChecked.type}:${serverChecked.address}`, result, 5 * 60 * 1000);
+            this.serverMetricsService.insert({
+                address: serverChecked.address,
+                type: serverChecked.type,
+                playersOnline: result.playersOnline,
+                playersMax: result.playersMax,
+            });
         }
         return {
             "frames": [
