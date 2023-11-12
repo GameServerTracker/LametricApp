@@ -15,7 +15,7 @@ export class ServerMetricsService {
 
     async findOne(address: string): Promise<ServerMetrics> {
         try {
-            const serverMetrics: ServerMetrics = await this.serverMetricsRepository.findOne({where: {address: address}});
+            const serverMetrics: ServerMetrics = await this.serverMetricsRepository.findOne({ where: { address: address } });
             if (serverMetrics == null) {
                 this.logger.warn(`Server metrics for ${address} not found !`);
             }
@@ -34,5 +34,10 @@ export class ServerMetricsService {
             this.logger.error("Error while inserting server metrics !", error, error.stack);
             throw error;
         }
+    }
+
+    async getAllPlayersOnlineValues(address: string): Promise<number[]> {
+        const metrics = await this.serverMetricsRepository.find({ select: ['playersOnline'], where: { address } });
+        return metrics.map((metric) => metric.playersOnline);
     }
 }

@@ -8,6 +8,7 @@ import FrameDto from 'src/lametric/frameDto';
 import FrameTextDto from 'src/lametric/frameTextDto';
 import { ServerMetricsService } from './server-metrics/server-metrics.service';
 import { ServerTrackResultDto } from 'src/track/dto/serverTrackResultDto';
+import FrameSparklineDto from 'src/lametric/frameSparklineDto';
 
 @Injectable()
 export class ServerService {
@@ -27,6 +28,7 @@ export class ServerService {
     async trackServer(serverChecked: ServerCheckedDto): Promise<FrameDto> {
         const icon: IconServer = serverIconDict[serverChecked.type];
         const cache: any = await this.cacheManager.get(`${serverChecked.type}:${serverChecked.address}`);
+        const frame: FrameDto = { frames: [new FrameTextDto(serverChecked.name, icon)] };
         let result: ServerTrackResultDto;
 
         if (cache) {
@@ -41,11 +43,10 @@ export class ServerService {
                 playersMax: result.playersMax,
             });
         }
-        return {
-            "frames": [
-                new FrameTextDto(serverChecked.name, icon),
-                new FrameTextDto(result.isOnline ? `${result.playersOnline} / ${result.playersMax}` : "OFFLINE", icon)
-            ]
-        } as FrameDto;
+        frame.frames.push(new FrameTextDto(result.isOnline ? `${result.playersOnline} / ${result.playersMax}` : "OFFLINE", icon));
+        if (Number(serverChecked.sparkline) === 1) {
+            frame.frames.push(new FrameSparklineDto(1, await this.serverMetricsService.getAllPlayersOnlineValues(serverChecked.address)));
+        }
+        return frame;
     }
 }
