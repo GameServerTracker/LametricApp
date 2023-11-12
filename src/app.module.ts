@@ -17,6 +17,7 @@ import * as Joi from 'joi';
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
+        POSTGRES_SSLMODE: Joi.string().required(),
         PORT: Joi.number(),
       })
     }),

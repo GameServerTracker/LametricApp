@@ -18,7 +18,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           __dirname + '/../**/*.entity*{.ts,.js}',
         ],
         synchronize: true,
-        ssl: true,
+        ssl: configService.get('POSTGRES_SSLMODE') === 'true' ? true : false,
       })
     }),
   ],
