@@ -44,7 +44,7 @@ export class ServerService {
             });
         }
         frame.frames.push(new FrameTextDto(result.isOnline ? `${result.playersOnline} / ${result.playersMax}` : "OFFLINE", icon));
-        if (Number(serverChecked.sparkline) === 1) {
+        if (serverChecked.sparkline === 1) {
             frame.frames.push(new FrameSparklineDto(1, await this.serverMetricsService.getAllPlayersOnlineValues(serverChecked.address)));
         }
         return frame;

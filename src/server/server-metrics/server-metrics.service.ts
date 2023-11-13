@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ServerMetrics } from './server-metrics.entity';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateServerMetricsDto } from './dto/createServerMetricsDto';
 
@@ -37,7 +37,17 @@ export class ServerMetricsService {
     }
 
     async getAllPlayersOnlineValues(address: string): Promise<number[]> {
-        const metrics = await this.serverMetricsRepository.find({ select: ['playersOnline'], where: { address } });
+        const today: Date = new Date();
+        const oneDaysAgo: Date = new Date();
+        oneDaysAgo.setDate(today.getDate() - 1);
+
+        const metrics: ServerMetrics[] = await this.serverMetricsRepository.find({
+            select: ['playersOnline'], where: {
+                address,
+                timestamp: Between(oneDaysAgo, today)
+            },
+            order: { timestamp: "ASC" }
+        });
         return metrics.map((metric) => metric.playersOnline);
     }
 }
