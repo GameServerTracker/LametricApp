@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  lametric_app:
+    container_name: GST_LametricApp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    env_file:
+      - .env.dev
+    volumes:
+      - ./src:/src
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - gst-tier
+  postgres:
+    container_name: GST_DB
+    image: postgres
+    restart: always
+    networks:
+      - gst-tier
+    volumes:
+      - db-GSTAPI-data:/var/lib/postgresql/data
+    env_file:
+      - .env.dev
+
+networks:
+  gst-tier:
+
+
+volumes:
+  db-GSTAPI-data:

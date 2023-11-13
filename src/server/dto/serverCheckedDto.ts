@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { ServerType } from "src/config/enum";
 
 export default class ServerCheckedDto {
@@ -24,4 +25,11 @@ export default class ServerCheckedDto {
     })
     @IsNotEmpty() @IsString()
     address: string;
+
+    @ApiProperty({
+        description: "Enable sparkline",
+        enum: [1, 0]
+    })
+    @IsNotEmpty() @IsNumber() @Type(() => Number)
+    sparkline: number;
 }
