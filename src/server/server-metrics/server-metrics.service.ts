@@ -3,6 +3,7 @@ import { ServerMetrics } from './server-metrics.entity';
 import { Between, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateServerMetricsDto } from './dto/createServerMetricsDto';
+import { ServerType } from 'src/config/enum';
 
 @Injectable()
 export class ServerMetricsService {
@@ -36,7 +37,7 @@ export class ServerMetricsService {
         }
     }
 
-    async getAllPlayersOnlineValues(address: string): Promise<number[]> {
+    async getAllPlayersOnlineValues(address: string, type: ServerType): Promise<number[]> {
         const today: Date = new Date();
         const oneDaysAgo: Date = new Date();
         oneDaysAgo.setDate(today.getDate() - 1);
@@ -44,6 +45,7 @@ export class ServerMetricsService {
         const metrics: ServerMetrics[] = await this.serverMetricsRepository.find({
             select: ['playersOnline'], where: {
                 address,
+                type,
                 timestamp: Between(oneDaysAgo, today)
             },
             order: { timestamp: "ASC" }

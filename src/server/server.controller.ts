@@ -1,8 +1,9 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UseFilters } from '@nestjs/common';
 import ServerCheckedDto from './dto/serverCheckedDto';
 import { ServerService } from './server.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import FrameDto from 'src/lametric/frameDto';
+import RequestIncompleteFilter from 'src/filter/requestIncomplete.filter';
 
 @ApiTags('Server')
 @Controller('server')
@@ -32,6 +33,7 @@ export class ServerController {
             },
         },
     })
+    @UseFilters(RequestIncompleteFilter)
     async trackServer(@Query() serverChecked: ServerCheckedDto): Promise<FrameDto> {
         return await this.serverService.trackServer(serverChecked);
     }
