@@ -21,7 +21,7 @@ import * as Joi from 'joi';
         PORT: Joi.number(),
       })
     }),
-    DatabaseModule,
+    //DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

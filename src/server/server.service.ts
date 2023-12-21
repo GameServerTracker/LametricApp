@@ -14,7 +14,7 @@ import FrameSparklineDto from 'src/lametric/frameSparklineDto';
 export class ServerService {
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache,
         private readonly trackService: TrackService,
-        private readonly serverMetricsService: ServerMetricsService
+        //private readonly serverMetricsService: ServerMetricsService
     ) { }
 
     readonly actionDict: { [id in ServerType]: (address: string) => Promise<ServerTrackResultDto> } = {
@@ -36,16 +36,16 @@ export class ServerService {
         } else {
             result = await this.actionDict[serverChecked.type](serverChecked.address);
             this.cacheManager.set(`${serverChecked.type}:${serverChecked.address}`, result, 5 * 60 * 1000);
-            this.serverMetricsService.insert({
-                address: serverChecked.address,
-                type: serverChecked.type,
-                playersOnline: result.playersOnline,
-                playersMax: result.playersMax,
-            });
+            // this.serverMetricsService.insert({
+            //     address: serverChecked.address,
+            //     type: serverChecked.type,
+            //     playersOnline: result.playersOnline,
+            //     playersMax: result.playersMax,
+            // });
         }
         frame.frames.push(new FrameTextDto(result.isOnline ? `${result.playersOnline} / ${result.playersMax}` : "OFFLINE", icon));
         if (serverChecked.sparkline === "true") {
-            frame.frames.push(new FrameSparklineDto(1, await this.serverMetricsService.getAllPlayersOnlineValues(serverChecked.address)));
+            //frame.frames.push(new FrameSparklineDto(1, await this.serverMetricsService.getAllPlayersOnlineValues(serverChecked.address)));
         }
         return frame;
     }

@@ -7,8 +7,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServerMetrics } from './server-metrics/server-metrics.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ServerMetrics]), CacheModule.register(), TrackModule],
+  imports: [
+    /*TypeOrmModule.forFeature([ServerMetrics]),*/
+    CacheModule.register(),
+    TrackModule
+  ],
   controllers: [ServerController],
-  providers: [ServerService, ServerMetricsService]
+  providers: [
+    ServerService,
+    //ServerMetricsService
+  ]
 })
-export class ServerModule {}
+export class ServerModule { }
