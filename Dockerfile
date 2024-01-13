@@ -1,9 +1,9 @@
-FROM --platform=linux/amd64 node:latest
+FROM --platform=linux/amd64 node:20-alpine
 
 COPY . .
 
 RUN yarn install
 RUN yarn build
-EXPOSE 3000
+EXPOSE 3095
 
-CMD yarn start:dev
+CMD yarn start:prod
