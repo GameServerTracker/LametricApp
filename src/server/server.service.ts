@@ -1,4 +1,4 @@
-import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { serverIconDict } from 'src/config/dict';
 import { IconServer, ServerType } from 'src/config/enum';
 import { TrackService } from 'src/track/track.service';
@@ -9,6 +9,7 @@ import FrameTextDto from 'src/lametric/frameTextDto';
 import { ServerMetricsService } from './server-metrics/server-metrics.service';
 import { ServerTrackResultDto } from 'src/track/dto/serverTrackResultDto';
 import FrameSparklineDto from 'src/lametric/frameSparklineDto';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class ServerService {

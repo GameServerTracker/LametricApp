@@ -1,10 +1,11 @@
-import { CacheModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TrackModule } from 'src/track/track.module';
 import { ServerController } from './server.controller';
 import { ServerService } from './server.service';
 import { ServerMetricsService } from './server-metrics/server-metrics.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServerMetrics } from './server-metrics/server-metrics.entity';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [

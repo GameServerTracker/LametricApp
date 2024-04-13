@@ -23,5 +23,6 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, swaggerDocument);
   app.useGlobalPipes(new ValidationPipe({ disableErrorMessages: false, whitelist: true }))
   await app.listen(process.env.PORT || 3000);
+  console.log(`GST Lametric is running. Swagger: ${await app.getUrl()}/api-docs`);
 }
 bootstrap();
