@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -23,6 +23,6 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, swaggerDocument);
   app.useGlobalPipes(new ValidationPipe({ disableErrorMessages: false, whitelist: true }))
   await app.listen(process.env.PORT || 3000);
-  console.log(`GST Lametric is running. Listening on port ${process.env.PORT || 3000}`);
+  Logger.log(`GST Lametric is running. Listening on port ${process.env.PORT || 3000}`, "Bootstrap");
 }
 bootstrap();

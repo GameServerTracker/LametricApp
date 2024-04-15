@@ -10,12 +10,14 @@ export class AppController {
   @Get()
   @ApiOperation({
     summary: "Ping the API",
+    description: "This route is used to know if the API is alive or not."
   })
   @ApiResponse({
     status: 200,
     schema: {
+      description: "The API is alive ! It's a good sign !",
       example: {
-        message: 'GameServerTracker 3.0 is OK !'
+        message: 'GameServerTracker Lametric App is OP !',
       }
     }
   })
