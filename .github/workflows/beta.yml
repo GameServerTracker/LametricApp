@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - beta
+env:
+  APP_TAG: beta
+
 jobs:
   buildDockerImage:
     runs-on: ubuntu-latest
@@ -12,13 +15,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG .
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      - name: Set Docker image tag
+        run: docker tag ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG
       - name: Push Docker image
-        run: docker tag ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta
-      - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG
   deploy:
     runs-on: ubuntu-latest
     name: Continuous Deployment
@@ -32,7 +35,7 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             port: 22
             script: |
-              docker stop gst-lametric-beta;
-              docker rm gst-lametric-beta;
-              docker pull ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta;
-              docker run -d --name gst-lametric-beta -p 3000:3094 ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta;
+              docker stop gst-lametric-$APP_TAG;
+              docker rm gst-lametric-$APP_TAG;
+              docker pull ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
+              docker run -d --name gst-lametric-$APP_TAG -p 3095:3000 --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta;
