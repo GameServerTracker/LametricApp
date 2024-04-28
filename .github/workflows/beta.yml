@@ -34,7 +34,7 @@ jobs:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USERNAME }}
             key: ${{ secrets.SSH_KEY }}
-            port: 22,
+            port: 22
             envs: APP_TAG, PORT
             script: |
               docker stop gst-lametric-$APP_TAG;
