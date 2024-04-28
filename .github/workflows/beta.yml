@@ -6,6 +6,7 @@ on:
       - beta
 env:
   APP_TAG: beta
+  PORT: 3095
 
 jobs:
   buildDockerImage:
@@ -33,9 +34,10 @@ jobs:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USERNAME }}
             key: ${{ secrets.SSH_KEY }}
-            port: 22
+            port: 22,
+            envs: APP_TAG, PORT
             script: |
               docker stop gst-lametric-$APP_TAG;
               docker rm gst-lametric-$APP_TAG;
               docker pull ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
-              docker run -d --name gst-lametric-$APP_TAG -p 3095:3000 --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/gst-lametric:beta;
+              docker run -d --name gst-lametric-$APP_TAG -p $PORT:3000 --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
