@@ -4,6 +4,6 @@ COPY . .
 
 RUN yarn install
 RUN yarn build
-EXPOSE 3095
+EXPOSE 3000
 
 CMD yarn start:prod

@@ -5,7 +5,7 @@ enum IconServer {
     Unknown = "11366"
 };
 
-enum ServerType {
+enum ServerTypeParams {
     FiveM = "FiveM",
     FiveMByCfxCode = "FiveMCfxCode",
     Source = "Source",
@@ -15,5 +15,5 @@ enum ServerType {
 
 export {
     IconServer,
-    ServerType
+    ServerTypeParams
 }

@@ -1,6 +1,6 @@
-import { IconServer, ServerType } from "./enum";
+import { IconServer, ServerTypeParams } from "./enum";
 
-const serverIconDict: { [serverType in ServerType]: IconServer} = {
+const serverIconDict: { [serverType in ServerTypeParams]: IconServer} = {
     Minecraft: IconServer.Minecraft,
     MinecraftBedrock: IconServer.Minecraft,
     Source: IconServer.Source,

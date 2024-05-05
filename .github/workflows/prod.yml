@@ -1,0 +1,43 @@
+name: Deploy GST Prod to Server
+
+on:
+  push:
+    branches:
+      - main
+env:
+  APP_TAG: prod
+  PORT: 3000
+
+jobs:
+  buildDockerImage:
+    runs-on: ubuntu-latest
+    name: Build/Push Docker image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG .
+      - name: Login to Docker Hub
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      - name: Set Docker image tag
+        run: docker tag ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG
+  deploy:
+    runs-on: ubuntu-latest
+    name: Continuous Deployment
+    needs: [buildDockerImage]
+    steps:
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USERNAME }}
+            key: ${{ secrets.SSH_KEY }}
+            port: 22
+            envs: APP_TAG, PORT
+            script: |
+              docker stop gst-lametric-$APP_TAG;
+              docker rm gst-lametric-$APP_TAG;
+              docker pull ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
+              docker run -d --name gst-lametric-$APP_TAG -p $PORT:3000 --network ${{ secrets.DOCKER_NETWORK }} --restart unless-stopped --env-file ${{ secrets.ENV_PATH }} ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;

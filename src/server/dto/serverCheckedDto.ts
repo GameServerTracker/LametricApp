@@ -1,7 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
-import { ServerType } from "src/config/enum";
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { ServerTypeParams } from "src/config/enum";
 
 export default class ServerCheckedDto {
     @ApiProperty({
@@ -13,11 +12,11 @@ export default class ServerCheckedDto {
 
     @ApiProperty({
         description: "Type of game server",
-        example: ServerType.Minecraft,
-        enum: [ServerType.Minecraft, ServerType.MinecraftBedrock, ServerType.Source, ServerType.FiveM, ServerType.FiveMByCfxCode],
+        example: ServerTypeParams.Minecraft,
+        enum: [ServerTypeParams.Minecraft, ServerTypeParams.MinecraftBedrock, ServerTypeParams.Source, ServerTypeParams.FiveM, ServerTypeParams.FiveMByCfxCode],
     })
-    @IsNotEmpty() @IsString() @IsEnum(ServerType)
-    type: ServerType;
+    @IsNotEmpty() @IsString() @IsEnum(ServerTypeParams)
+    type: ServerTypeParams;
 
     @ApiProperty({
         description: "Server's address",

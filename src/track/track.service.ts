@@ -22,11 +22,15 @@ export class TrackService {
             return {
                 playersOnline: data.players.online ?? 0,
                 playersMax: data.players.max ?? 0,
-                isOnline: true
+                isOnline: true,
+                playerList: data.players.sample ? JSON.stringify(data.players.sample) : null,
             } as ServerTrackResultDto;
         } catch (err: any) {
             this.logger.warn(`[MC, ${address}] ${err.name}: ${err.message}`);
-            return { isOnline: false } as ServerTrackResultDto;
+            return {
+                isOnline: false,
+                errorMessage: `${err.name}: ${err.message}`,
+            } as ServerTrackResultDto;
         }
     }
 
@@ -43,11 +47,14 @@ export class TrackService {
             return {
                 playersOnline: data.players.online ?? 0,
                 playersMax: data.players.max ?? 0,
-                isOnline: true
+                isOnline: true,
             } as ServerTrackResultDto;
         } catch (err: any) {
             this.logger.warn(`[MC Bedrock, ${address}] ${err.name}: ${err.message}`);
-            return { isOnline: false } as ServerTrackResultDto;
+            return {
+                isOnline: false,
+                errorMessage: `${err.name}: ${err.message}`,
+            } as ServerTrackResultDto;
         }
     }
 
@@ -64,11 +71,14 @@ export class TrackService {
             return {
                 playersOnline: data.players.online ?? 0,
                 playersMax: data.players.max ?? 0,
-                isOnline: true
+                isOnline: true,
             } as ServerTrackResultDto;
         } catch (err: any) {
             this.logger.warn(`[Source, ${address}] ${err.name}: ${err.message}`);
-            return { isOnline: false } as ServerTrackResultDto;
+            return {
+                isOnline: false,
+                errorMessage: `${err.name}: ${err.message}`,
+            } as ServerTrackResultDto;
         }
     }
 
@@ -78,25 +88,35 @@ export class TrackService {
             return {
                 playersOnline: response.data.clients ?? 0,
                 playersMax: response.data.sv_maxclients ?? 0,
-                isOnline: true
+                isOnline: true,
             } as ServerTrackResultDto;
         } catch (err: any) {
             this.logger.warn(`[FiveM, ${address}] ${err.name}: ${err.message}`);
-            return { isOnline: false } as ServerTrackResultDto;
+            return {
+                isOnline: false,
+                errorMessage: `${err.name}: ${err.message}`,
+            } as ServerTrackResultDto;
         }
     }
 
     async trackFiveMServerByCfx(code: string): Promise<ServerTrackResultDto> {
         try {
-            const response: AxiosResponse = await axios.get(`https://servers-frontend.fivem.net/api/servers/single/${code}`, { timeout: 2000, headers: { 'User-Agent': 'GST API' } });
+            const response: AxiosResponse = await axios.get(`https://servers-frontend.fivem.net/api/servers/single/${code}`, { 
+                timeout: 2000,
+                headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' }
+            });
             return {
                 playersOnline: response.data.Data.clients ?? 0,
                 playersMax: response.data.Data.sv_maxclients ?? 0,
-                isOnline: true
+                isOnline: true,
+                playerList: response.data.Data["players"] ? JSON.stringify(response.data.Data["players"]) : null
             } as ServerTrackResultDto;
         } catch (err: any) {
             this.logger.warn(`[FiveM CFX, ${code}] ${err.name}: ${err.message}`);
-            return { isOnline: false } as ServerTrackResultDto;
+            return {
+                isOnline: false,
+                errorMessage: `${err.name}: ${err.message}`,
+            } as ServerTrackResultDto;
         }
     }
 }
