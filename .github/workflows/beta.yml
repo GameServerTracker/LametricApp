@@ -40,4 +40,4 @@ jobs:
               docker stop gst-lametric-$APP_TAG;
               docker rm gst-lametric-$APP_TAG;
               docker pull ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
-              docker run -d --name gst-lametric-$APP_TAG -p $PORT:3000 --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
+              docker run -d --name gst-lametric-$APP_TAG -p $PORT:3000 --network ${{ secrets.DOCKER_NETWORK }} --restart unless-stopped --env-file ${{ secrets.ENV_PATH }} ${{ secrets.DOCKER_USERNAME }}/gst-lametric:$APP_TAG;
